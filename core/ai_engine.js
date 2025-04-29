@@ -35,3 +35,18 @@ const AI = {
         return await fetchInternetSearch(question);
     }
 };
+async function fetchInternetSearch(query) {
+    let url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=AIzaSyAyzs2DrDKWB7IrFx9VPWUgMOPbzdFOWrU&cx=a16ea2a3c680c408c`;
+
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
+        if (data.items && data.items.length > 0) {
+            let firstResult = data.items[0];
+            return `${firstResult.snippet} 🌐 [קרא עוד](${firstResult.link})`;
+        }
+        return "🤖 לא נמצא מידע רלוונטי.";
+    } catch (error) {
+        return "⚠️ הייתה בעיה בגישה למידע.";
+    }
+}
