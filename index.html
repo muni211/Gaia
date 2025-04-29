@@ -32,4 +32,11 @@
 
   <input type="text" id="user-answer" placeholder="תן תשובה לשאלה זו...">
 <button onclick="teachAI()">📚 למד אותי!</button>
-  
+  <script>
+function teachAI() {
+    let question = document.getElementById("user-question").value;
+    let answer = document.getElementById("user-answer").value;
+    AI.learn(question, answer);  // המערכת לומדת את התשובה
+    document.getElementById("answer").innerText = "📚 למדתי תשובה חדשה!";
+}
+</script>
