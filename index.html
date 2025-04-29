@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>המערכת החכמה שלי</title>
-  <link rel="stylesheet" href="styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI חכם לשאלות</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <h1>🔹 מערכת AI חכמה 🔹</h1>
-  <p>הזן טקסט וראה את התוצאה:</p>
-  
-  <!-- ממשק המשתמש הראשי -->
-  <div id="ui-container">
-    <input type="text" id="user-input" placeholder="כתוב משהו...">
-    <button onclick="processInput()">🔍 עיבוד</button>
-    <p id="result"></p>
-  </div>
-  
-  <!-- טעינת קבצי ה-JS (מודולים) -->
-  <script src="nlp/nlp_module.js"></script>
-  <script src="core/ai_engine.js"></script>
-  <script src="graphics/ui_engine.js"></script>
-  
-  <!-- פונקציה שמשלבת את המודולים -->
-  <script>
-    function processInput() {
-      let input = document.getElementById("user-input").value;
-      // שימוש במודול העיבוד לשפה לטיפול בטקסט (לדוגמה, המרת הטקסט לאותיות גדולות)
-      let processed = NLP.process(input);
-      // שימוש במנוע AI שינתח את הטקסט המעובד
-      let result = AI.analyze(processed);
-      // עדכון המסך באמצעות ה־GUI engine
-      UI.showResult(result);
-    }
-  </script>
+    <h1>🤖 מערכת AI לשאלות</h1>
+    <p>שאל שאלה ותקבל תשובה מה-AI:</p>
+
+    <!-- ממשק המשתמש -->
+    <div id="ui-container">
+        <input type="text" id="user-question" placeholder="שאל אותי משהו...">
+        <button onclick="askAI()">❓ שלח</button>
+        <p id="answer"></p>
+    </div>
+
+    <!-- טעינת מנוע ה-AI -->
+    <script src="core/ai_engine.js"></script>
+
+    <script>
+        function askAI() {
+            let question = document.getElementById("user-question").value;
+            let answer = AI.respond(question);  // שולח את השאלה למנוע ה-AI
+            document.getElementById("answer").innerText = answer; // מציג את התשובה
+        }
+    </script>
 </body>
 </html>
+  
+  
