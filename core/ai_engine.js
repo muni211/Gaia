@@ -1,7 +1,5 @@
-// מנוע AI שמבצע ניתוח בסיסי – לדוגמה, מוסיף טקסט מסוים לתוצאה
 const AI = {
   analyze: function(inputText) {
-    // נוסיף הודעה פשוטה לפני הטקסט המעובד
-    return "תוצאה: " + inputText;
+    return "🤖 תשובה חכמה: " + inputText.split("").reverse().join("");  // הופך את הטקסט לאחור לדוגמה
   }
 };
