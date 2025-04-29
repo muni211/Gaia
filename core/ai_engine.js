@@ -62,3 +62,8 @@ const AI = {
 document.getElementById("searchButton").addEventListener("click", function() {
     console.log("🔎 הכפתור נלחץ!");
 });
+document.getElementById("searchButton").addEventListener("click", async function() {
+    let query = document.getElementById("user-question").value; // קבלת השאלה שהמשתמש הכניס
+    let result = await fetchInternetSearch(query); // חיפוש באינטרנט
+    document.getElementById("answer").innerText = result; // הצגת התוצאה
+});
