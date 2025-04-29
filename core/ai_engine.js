@@ -74,3 +74,6 @@ window.onload = function() {
         alert("🔎 הכפתור נלחץ!");
     });
 };
+document.getElementById("searchButton").addEventListener("click", function() {
+    alert("🔎 הכפתור נלחץ!");
+});
