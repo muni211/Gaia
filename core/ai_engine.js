@@ -59,3 +59,6 @@ const AI = {
         return await fetchInternetSearch(question);
     }
 };
+document.getElementById("searchButton").addEventListener("click", function() {
+    console.log("🔎 הכפתור נלחץ!");
+});
