@@ -41,12 +41,21 @@ async function fetchInternetSearch(query) {
     try {
         let response = await fetch(url);
         let data = await response.json();
-        if (data.items && data.items.length > 0) {
-            let firstResult = data.items[0];
-            return `${firstResult.snippet} 🌐 [קרא עוד](${firstResult.link})`;
-        }
-        return "🤖 לא נמצא מידע רלוונטי.";
+        return data.items ? `${data.items[0].snippet} 🌐 [קרא עוד](${data.items[0].link})` : "🤖 לא נמצא מידע רלוונטי.";
     } catch (error) {
         return "⚠️ הייתה בעיה בגישה למידע.";
     }
 }
+
+const AI = {
+    knowledgeBase: {},  
+    learn: function(question, answer) {
+        this.knowledgeBase[question] = answer;  
+    },
+    async respond(question) {
+        if (this.knowledgeBase[question]) {
+            return this.knowledgeBase[question];
+        }
+        return await fetchInternetSearch(question);
+    }
+};
