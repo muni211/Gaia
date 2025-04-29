@@ -68,4 +68,4 @@ document.getElementById("searchButton").addEventListener("click", async function
     document.getElementById("answer").innerText = result; // הצגת התוצאה
 });document.getElementById("searchButton").addEventListener("click", function() {
     document.getElementById("answer").innerText = "🔎 הכפתור עובד!";
-});
+});alert("✅ קובץ JavaScript נטען בהצלחה!");
