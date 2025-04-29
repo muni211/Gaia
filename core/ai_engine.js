@@ -69,3 +69,8 @@ document.getElementById("searchButton").addEventListener("click", async function
 });document.getElementById("searchButton").addEventListener("click", function() {
     document.getElementById("answer").innerText = "🔎 הכפתור עובד!";
 });alert("✅ קובץ JavaScript נטען בהצלחה!");
+window.onload = function() {
+    document.getElementById("searchButton").addEventListener("click", function() {
+        alert("🔎 הכפתור נלחץ!");
+    });
+};
