@@ -11,27 +11,27 @@ const AI = {
         return "🤖 אני עדיין לומד! רוצה ללמד אותי תשובה מתאימה?";
     }
 };
-async function fetchWikipediaSummary(query) {
-    let url = `https://he.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`;
-    
+async function fetchInternetSearch(query) {
+    let url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=AIzaSyAyzs2DrDKWB7IrFx9VPWUgMOPbzdFOWrU&cx=a16ea2a3c680c408c`;
+
     try {
         let response = await fetch(url);
         let data = await response.json();
-        return data.extract || "🤖 לא נמצא מידע רלוונטי.";
+        return data.items ? data.items[0].snippet : "🤖 לא נמצא מידע רלוונטי.";
     } catch (error) {
         return "⚠️ הייתה בעיה בגישה למידע.";
     }
 }
 
 const AI = {
-    knowledgeBase: {}, 
+    knowledgeBase: {},  
     learn: function(question, answer) {
-        this.knowledgeBase[question] = answer;
+        this.knowledgeBase[question] = answer;  
     },
     async respond(question) {
         if (this.knowledgeBase[question]) {
             return this.knowledgeBase[question];
         }
-        return await fetchWikipediaSummary(question);
+        return await fetchInternetSearch(question);
     }
 };
