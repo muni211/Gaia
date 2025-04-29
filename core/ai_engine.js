@@ -1,12 +1,13 @@
 const AI = {
+    knowledgeBase: {},  // בסיס ידע ללמידת מכונה
+    learn: function(question, answer) {
+        this.knowledgeBase[question] = answer;  // שומר תשובות שניתנו
+    },
     respond: function(question) {
-        let responses = {
-            "מה מזג האוויר היום?": "🌤 קשה לומר, אבל כדאי לבדוק תחזית!",
-            "איך אני בונה מערכת AI?": "🚀 למידה, קידוד, והתנסות – כך בונים את העתיד!",
-            "מה השעה?": `⌚ השעה עכשיו היא ${new Date().toLocaleTimeString("he-IL")}.`,
-            "מי יצר אותך?": "גד מוני ספרא בעזרת copilot"
-        };
-
-        return responses[question] || "🤖 אני עדיין לומד לענות על זה!";
+        // אם יש תשובה קודמת לשאלה זו, החזר אותה
+        if (this.knowledgeBase[question]) {
+            return this.knowledgeBase[question];
+        }
+        return "🤖 אני עדיין לומד! רוצה ללמד אותי תשובה מתאימה?";
     }
 };
