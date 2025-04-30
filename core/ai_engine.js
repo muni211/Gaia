@@ -1,40 +1,25 @@
-const AI = {
-    knowledgeBase: {},  // בסיס ידע ללמידת מכונה
-    learn: function(question, answer) {
-        this.knowledgeBase[question] = answer;  // שומר תשובות שניתנו
-    },
-    respond: function(question) {
-        // אם יש תשובה קודמת לשאלה זו, החזר אותה
-        if (this.knowledgeBase[question]) {
-            return this.knowledgeBase[question];
-        }
-        return "🤖 אני עדיין לומד! רוצה ללמד אותי תשובה מתאימה?";
-    }
-};
-async function fetchInternetSearch(query) {
-    let url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=AIzaSyAyzs2DrDKWB7IrFx9VPWUgMOPbzdFOWrU&cx=a16ea2a3c680c408c`;
-
-    try {
-        let response = await fetch(url);
-        let data = await response.json();
-        return data.items ? data.items[0].snippet : "🤖 לא נמצא מידע רלוונטי.";
-    } catch (error) {
-        return "⚠️ הייתה בעיה בגישה למידע.";
-    }
-}
-
+// מערכת AI עם בסיס ידע ולמידת מכונה עמוקה
 const AI = {
     knowledgeBase: {},  
+    
     learn: function(question, answer) {
-        this.knowledgeBase[question] = answer;  
+        this.knowledgeBase[question] = answer;  // שמירת תשובות ללמידה עמוקה
     },
+    
     async respond(question) {
+        // בדיקה אם קיימת תשובה בבסיס הידע
         if (this.knowledgeBase[question]) {
             return this.knowledgeBase[question];
         }
-        return await fetchInternetSearch(question);
+
+        // אם אין תשובה – חפש באינטרנט ושמור את המידע
+        let answer = await fetchInternetSearch(question);
+        this.learn(question, answer); // AI לומד לעתיד
+        return answer;
     }
 };
+
+// פונקציה לחיפוש מידע באינטרנט
 async function fetchInternetSearch(query) {
     let url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=AIzaSyAyzs2DrDKWB7IrFx9VPWUgMOPbzdFOWrU&cx=a16ea2a3c680c408c`;
 
@@ -47,33 +32,30 @@ async function fetchInternetSearch(query) {
     }
 }
 
-const AI = {
-    knowledgeBase: {},  
-    learn: function(question, answer) {
-        this.knowledgeBase[question] = answer;  
-    },
-    async respond(question) {
-        if (this.knowledgeBase[question]) {
-            return this.knowledgeBase[question];
-        }
-        return await fetchInternetSearch(question);
-    }
-};
-document.getElementById("searchButton").addEventListener("click", function() {
-    console.log("🔎 הכפתור נלחץ!");
-});
-document.getElementById("searchButton").addEventListener("click", async function() {
-    let query = document.getElementById("user-question").value; // קבלת השאלה שהמשתמש הכניס
-    let result = await fetchInternetSearch(query); // חיפוש באינטרנט
-    document.getElementById("answer").innerText = result; // הצגת התוצאה
-});document.getElementById("searchButton").addEventListener("click", function() {
-    document.getElementById("answer").innerText = "🔎 הכפתור עובד!";
-});alert("✅ קובץ JavaScript נטען בהצלחה!");
+// בדיקת תגובת הכפתורים
 window.onload = function() {
-    document.getElementById("searchButton").addEventListener("click", function() {
-        alert("🔎 הכפתור נלחץ!");
+    // חיבור כפתורי חיפוש מידע
+    document.getElementById("searchButton1").addEventListener("click", function() {
+        alert("🔎 חיפוש מידע 1 נלחץ!");
+    });
+
+    document.getElementById("searchButton2").addEventListener("click", function() {
+        alert("🔎 חיפוש מידע 2 נלחץ!");
+    });
+
+    document.getElementById("searchButton3").addEventListener("click", function() {
+        alert("🔎 חיפוש מידע 3 נלחץ!");
+    });
+
+    // חיבור כפתור "שלח" לבדיקת תגובה
+    document.getElementById("askButton").addEventListener("click", function() {
+        alert("🚀 הכפתור 'שלח' נלחץ!");
+    });
+
+    // חיבור כפתור "שלח" לחיפוש בבסיס ידע או באינטרנט
+    document.getElementById("askButton").addEventListener("click", async function() {
+        let question = document.getElementById("user-question").value;
+        let answer = await AI.respond(question);
+        document.getElementById("answer").innerText = answer;
     });
 };
-document.getElementById("searchButton").addEventListener("click", function() {
-    alert("🔎 הכפתור נלחץ!");
-});
